@@ -1,5 +1,14 @@
 import streamlit as st
 import requests
+import subprocess
+import time
+
+# Start FastAPI backend if not already running
+try:
+    requests.get("http://127.0.0.1:8000/tweets")
+except Exception:
+    subprocess.Popen(["uvicorn", "backend.main:app", "--host", "127.0.0.1", "--port", "8000"])
+    time.sleep(2)
 
 st.set_page_config(
    layout = "wide"
